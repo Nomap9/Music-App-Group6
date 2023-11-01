@@ -35,172 +35,172 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.home);
 
-        LoadItemLayout();
-        AddSong();
-        Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
-            Song song = (Song) bundle.get("object song");
-            position = song.getIDSong();
-            countTypePlay = 0;
-
-            CreateMediaPlayer();
-            StartSong();
-            LoadAnimation();
-        }
-        else{
-            position = 0;
-            CreateMediaPlayer();
-            LoadTimeTotalSong();
-        }
-
-        btnTypePlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(countTypePlay == 0){
-                    countTypePlay = 1;
-                    btnTypePlay.setImageResource(R.drawable.icon_repeat);
-                    position = position;
-                }
-                else{
-                    if(mediaPlayer.isPlaying()){
-                        mediaPlayer.pause();
-                    }
-                    if(countTypePlay == 1){
-                        countTypePlay = 2;
-                        btnTypePlay.setImageResource(R.drawable.icon_random);
-                    }
-                    else{
-                        countTypePlay = 0;
-                        btnTypePlay.setImageResource(R.drawable.icon_loop);
-                    }
-                }
-            }
-        });
-
-        btnChangeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,MainListSong.class);
-                startActivity(intent);
-                if(mediaPlayer.isPlaying()){
-                    mediaPlayer.stop();
-                }
-            }
-        });
-
-        btnPlayPause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(mediaPlayer.isPlaying()){
-                    mediaPlayer.pause();
-                    imgAvatarSong.animate().cancel();
-                    btnPlayPause.setImageResource(R.drawable.icon_play);
-                }
-                else{
-                    mediaPlayer.start();
-                    LoadAnimation();
-                    btnPlayPause.setImageResource(R.drawable.icon_pause);
-                }
-                LoadTimeTotalSong();
-                UpdateTimeSong();
-            }
-        });
-
-        btnPre10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                seekbarSong.setProgress(mediaPlayer.getCurrentPosition() - 10000);
-
-                if(mediaPlayer.getCurrentPosition() <= 10000){
-                    seekbarSong.setProgress(0);
-                }
-                mediaPlayer.seekTo(seekbarSong.getProgress());
-                txtTimeSong.setText(formatTime.format(seekbarSong.getProgress()));
-            }
-        });
-
-        btnNext10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                seekbarSong.setProgress(mediaPlayer.getCurrentPosition() + 10000);
-
-                if(mediaPlayer.getCurrentPosition() == mediaPlayer.getDuration() - 9000){
-                    seekbarSong.setProgress(mediaPlayer.getDuration());
-                }
-
-                mediaPlayer.seekTo(seekbarSong.getProgress());
-                txtTimeSong.setText(formatTime.format(seekbarSong.getProgress()));
-            }
-        });
-
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mediaPlayer.isPlaying()){
-                    mediaPlayer.stop();
-                }
-                if(countTypePlay == 0){
-                    position++;
-                    if(position > arraySong.size() - 1){
-                        position = 0;
-                    }
-                }
-                else if(countTypePlay == 1){
-                    position += 0;
-                }
-                else{
-                    Random rd = new Random();
-                    position = rd.nextInt((7-2+1)+2);
-                }
-                CreateMediaPlayer();
-                StartSong();
-                LoadAnimation();
-            }
-        });
-
-        btnPre.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mediaPlayer.isPlaying()){
-                    mediaPlayer.stop();
-                }
-                if(countTypePlay == 0){
-                    position--;
-                    if(position < 0){
-                        position = arraySong.size() - 1;
-                    }
-                }
-                else if(countTypePlay == 1){
-                    position += 0;
-                }
-                else{
-                    Random rd = new Random();
-                    position = rd.nextInt((7-2+1)+2);
-                }
-                CreateMediaPlayer();
-                StartSong();
-                LoadAnimation();
-            }
-        });
-
-        seekbarSong.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                mediaPlayer.seekTo(seekbarSong.getProgress());
-                txtTimeSong.setText(formatTime.format(seekbarSong.getProgress()));
-            }
-        });
+//        LoadItemLayout();
+//        AddSong();
+//        Bundle bundle = getIntent().getExtras();
+//        if(bundle != null){
+//            Song song = (Song) bundle.get("object song");
+//            position = song.getIDSong();
+//            countTypePlay = 0;
+//
+//            CreateMediaPlayer();
+//            StartSong();
+//            LoadAnimation();
+//        }
+//        else{
+//            position = 0;
+//            CreateMediaPlayer();
+//            LoadTimeTotalSong();
+//        }
+//
+//        btnTypePlay.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(countTypePlay == 0){
+//                    countTypePlay = 1;
+//                    btnTypePlay.setImageResource(R.drawable.icon_repeat);
+//                    position = position;
+//                }
+//                else{
+//                    if(mediaPlayer.isPlaying()){
+//                        mediaPlayer.pause();
+//                    }
+//                    if(countTypePlay == 1){
+//                        countTypePlay = 2;
+//                        btnTypePlay.setImageResource(R.drawable.icon_random);
+//                    }
+//                    else{
+//                        countTypePlay = 0;
+//                        btnTypePlay.setImageResource(R.drawable.icon_loop);
+//                    }
+//                }
+//            }
+//        });
+//
+//        btnChangeLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this,MainListSong.class);
+//                startActivity(intent);
+//                if(mediaPlayer.isPlaying()){
+//                    mediaPlayer.stop();
+//                }
+//            }
+//        });
+//
+//        btnPlayPause.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if(mediaPlayer.isPlaying()){
+//                    mediaPlayer.pause();
+//                    imgAvatarSong.animate().cancel();
+//                    btnPlayPause.setImageResource(R.drawable.icon_play);
+//                }
+//                else{
+//                    mediaPlayer.start();
+//                    LoadAnimation();
+//                    btnPlayPause.setImageResource(R.drawable.icon_pause);
+//                }
+//                LoadTimeTotalSong();
+//                UpdateTimeSong();
+//            }
+//        });
+//
+//        btnPre10.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                seekbarSong.setProgress(mediaPlayer.getCurrentPosition() - 10000);
+//
+//                if(mediaPlayer.getCurrentPosition() <= 10000){
+//                    seekbarSong.setProgress(0);
+//                }
+//                mediaPlayer.seekTo(seekbarSong.getProgress());
+//                txtTimeSong.setText(formatTime.format(seekbarSong.getProgress()));
+//            }
+//        });
+//
+//        btnNext10.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                seekbarSong.setProgress(mediaPlayer.getCurrentPosition() + 10000);
+//
+//                if(mediaPlayer.getCurrentPosition() == mediaPlayer.getDuration() - 9000){
+//                    seekbarSong.setProgress(mediaPlayer.getDuration());
+//                }
+//
+//                mediaPlayer.seekTo(seekbarSong.getProgress());
+//                txtTimeSong.setText(formatTime.format(seekbarSong.getProgress()));
+//            }
+//        });
+//
+//        btnNext.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(mediaPlayer.isPlaying()){
+//                    mediaPlayer.stop();
+//                }
+//                if(countTypePlay == 0){
+//                    position++;
+//                    if(position > arraySong.size() - 1){
+//                        position = 0;
+//                    }
+//                }
+//                else if(countTypePlay == 1){
+//                    position += 0;
+//                }
+//                else{
+//                    Random rd = new Random();
+//                    position = rd.nextInt((7-2+1)+2);
+//                }
+//                CreateMediaPlayer();
+//                StartSong();
+//                LoadAnimation();
+//            }
+//        });
+//
+//        btnPre.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(mediaPlayer.isPlaying()){
+//                    mediaPlayer.stop();
+//                }
+//                if(countTypePlay == 0){
+//                    position--;
+//                    if(position < 0){
+//                        position = arraySong.size() - 1;
+//                    }
+//                }
+//                else if(countTypePlay == 1){
+//                    position += 0;
+//                }
+//                else{
+//                    Random rd = new Random();
+//                    position = rd.nextInt((7-2+1)+2);
+//                }
+//                CreateMediaPlayer();
+//                StartSong();
+//                LoadAnimation();
+//            }
+//        });
+//
+//        seekbarSong.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//                mediaPlayer.seekTo(seekbarSong.getProgress());
+//                txtTimeSong.setText(formatTime.format(seekbarSong.getProgress()));
+//            }
+//        });
     }
 
     private void StartSong(){
